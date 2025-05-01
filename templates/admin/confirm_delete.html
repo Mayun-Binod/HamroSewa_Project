@@ -1,0 +1,26 @@
+{% extends 'admin/admin_nav.html' %}
+
+{% block css %}
+<style>
+    /* Add any custom styles here */
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="container my-4">
+        <h2>Confirm Deletion</h2>
+        <hr>
+        <p>Are you sure you want to delete the booking for {{ booking.customer.user.first_name }} {{ booking.customer.user.last_name }}?</p>
+        <p><strong>Service Booked:</strong> {{ booking.user.service.service_name }}</p>
+        <p><strong>Book Date:</strong> {{ booking.book_date }}</p>
+        <p><strong>Status:</strong> {{ booking.status.status }}</p>
+
+        <form action="{% url 'delete_booking' booking.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'booking_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

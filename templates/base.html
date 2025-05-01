@@ -1,0 +1,329 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <style>
+        a {
+            text-decoration: none;
+        }
+.alert {
+    padding: 15px 25px;  
+    border-radius: 10px;  
+    font-size: 16px;  
+    transition: transform 0.3s ease; 
+}
+
+/* Hover effect for alert */
+.alert:hover {
+    transform: scale(1.05);  /* Slight scale-up effect when hovered */
+}
+
+/* Make the message strong tag stand out */
+.alert strong {
+    color: #007bff;  
+}
+
+/* Different alert types with custom colors */
+.alert-info {
+    background-color: #d1ecf1;  /* Light blue background */
+    border-color: #bee5eb;  /* Lighter border for info */
+}
+
+.alert-success {
+    background-color: #d4edda;  /* Light green background */
+    border-color: #c3e6cb;  /* Lighter border for success */
+}
+
+.alert-warning {
+    background-color: #fff3cd;  /* Light yellow background */
+    border-color: #ffeeba;  /* Lighter border for warning */
+}
+
+.alert-danger {
+    background-color: #f8d7da;  /* Light red background */
+    border-color: #f5c6cb;  /* Lighter border for danger */
+}
+
+/* Custom close button style */
+.btn-close {
+    color: #333;  /* Dark color for close button */
+    font-size: 1.25rem;  /* Slightly larger close button */
+    opacity: 0.8;  /* Slightly transparent close button */
+    transition: opacity 0.3s ease;  /* Smooth opacity transition */
+}
+
+.btn-close:hover {
+    opacity: 1;  /* Fully opaque when hovered */
+}
+/* Enhancements for Footer */
+footer {
+    background-color: #1c2331;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+footer h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Horizontal line style */
+footer hr {
+    width: 100px;
+    background-color: #7c4dff;
+    height: 2px;
+    margin: 10px 0;
+}
+
+footer p, footer a {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+
+footer a:hover {
+    color: #7c4dff;  
+    text-decoration: underline;
+}
+
+footer i {
+    color: #7c4dff;
+    margin-right: 10px;
+}
+
+footer p {
+    padding: 5px 0;
+}
+
+
+@media (max-width: 767px) {
+    footer .col-md-6 {
+        text-align: center;
+    }
+}
+
+
+        
+    </style>
+    {% block css %}
+    {% endblock css %}
+
+    <title>HamroSewa | {% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #080808; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{% static 'img/logo11.png' %}" style="width: 100px;" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-weight: 600;">
+                <li class="nav-item mx-2">
+                    <a class="nav-link active fs-5" aria-current="page" href="/">
+                        <i class="fa fa-home" style="padding-right: 8px;"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link fs-5" href="/about">
+                        <i class="fa fa-file" style="padding-right: 8px;"></i>About
+                    </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link fs-5" href="/services">
+                        <i class="fa fa-car" style="padding-right: 8px;"></i>Services
+                    </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link fs-5" href="{% url 'search_user' %}">
+                        <i class="fa fa-search" style="padding-right: 8px;"></i>Search Service Provider
+                    </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link fs-5" href="/contact">
+                        <i class="fa fa-phone" style="padding-right: 8px;"></i>Contact
+                    </a>
+                </li>
+                
+                
+            </ul>
+            <form class="d-flex align-items-center" action="/search" method="GET">
+                <!-- Search Input with better spacing and width adjustment -->
+                <input class="form-control me-3" type="search" name="search" id="search" 
+                       placeholder="Search Services" aria-label="Search" required>
+                
+                <!-- Submit Button with enhanced appearance -->
+                <button class="btn btn-outline-light btn-lg" type="submit" style="font-size: 1.2rem; padding: 10px 20px;">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+            <div class="m-2">
+                {% if user.is_authenticated %}
+                <span class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="userid"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome {{request.user}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="userid">
+                        {% if user.is_superuser %}
+                        <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        {% if not user.is_superuser %}
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <a class="dropdown-item" href="{% url 'booking_details' %}">Booking Details</a>
+                        {% endif %}
+                    </ul>
+                </span>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg mx-2" type="button">Login</a>
+                <span class="dropdown">
+                    <button class="btn btn-outline-light btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Sign up
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="border-radius: 8px;">
+                        <a class="dropdown-item px-4 py-3 d-flex align-items-center" href="{% url 'user_register' %}" style="font-size: 1.1rem; transition: background-color 0.3s, transform 0.3s;">
+                            <i class="fa fa-user me-3"></i> <!-- Icon for User -->
+                            <span style="text-transform: capitalize;">User</span>
+                        </a>
+                        <a class="dropdown-item px-4 py-3 d-flex align-items-center" href="{% url 'customer_register' %}" style="font-size: 1.1rem; transition: background-color 0.3s, transform 0.3s;">
+                            <i class="fa fa-users me-3"></i> <!-- Icon for Customer -->
+                            <span style="text-transform: capitalize;">Customer</span>
+                        </a>
+                    </ul>
+                </span>
+                
+                
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- End of Nav Bar -->
+
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show m-0" role="alert">
+        <strong>HamroSewa says :- </strong> {{message}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% block body %}{% endblock body %}
+
+<!-- ======= Footer ======= -->
+<footer class="text-white bg-dark">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4">
+                <h5 class="text-uppercase fw-bold text-primary">HamroSewa</h5>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 50px; background-color: #fff;" />
+                <p class="lead fs-bold">
+                    The vision of HamroSewa is to serve all the customers' service requirements and improve the
+                    quality of
+                    people's lives through technology solutions by providing quality services at their
+                    doorsteps.
+                </p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="text-uppercase fw-bold text-primary">Useful links</h5>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #fff;" />
+                <p>
+                    <a href="#!" class="text-white text-decoration-none">Home</a>
+                </p>
+                <p>
+                    <a href="/services/" class="text-white text-decoration-none">Services</a>
+                </p>
+                <p>
+                    <a href="/contact/" class="text-white text-decoration-none">Contact Us</a>
+                </p>
+                <p>
+                    <a href="/about/" class="text-white text-decoration-none">About Us</a>
+                </p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="text-uppercase fw-bold text-primary">Contact</h5>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #fff;" />
+                <p><i class="fa fa-home mr-3"></i>
+                    <a href="https://www.google.com/maps?q=Lagankhel,+Lalitpur" target="_blank" class="text-white text-decoration-none">Lagankhel, Lalitpur</a>
+                </p>
+                <p><i class="fa fa-envelope mr-3"></i>
+                    <a href="mailto:gharsewaadmin@gmail.com" class="text-white text-decoration-none">hamrosewa334@gmail.com</a>
+                </p>
+                <p><i class="fa fa-phone mr-3"></i>
+                    <a href="tel:9860591674" class="text-white text-decoration-none">9860591674</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p class="mb-0">© 2025 HamroSewa. All Rights Reserved.</p>
+</div>
+<!-- End of footer -->
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- Additional jquery -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+<!-- JavaScript (if you need to dynamically load icons) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" 
+integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" 
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    {% block js %}{% endblock js %}
+</body>
+
+</html>

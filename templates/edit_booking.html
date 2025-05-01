@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Edit Booking {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  .booking-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  .booking-header {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .form-control, .form-select {
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: #4361ee;
+    box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+  }
+  
+  .btn-save {
+    background: linear-gradient(135deg, #4cc9f0, #4361ee);
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    color: white;
+  }
+  
+  .btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+    color: white;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+  }
+  
+  .alert-danger {
+    border-radius: 8px;
+    border-left: 4px solid #dc3545;
+  }
+  
+  .input-group-text {
+    background-color: #f8f9fa;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="booking-container">
+        <div class="booking-header">
+          <h2><i class="fas fa-calendar-edit me-2"></i>Edit Booking</h2>
+          <p class="mb-0">Update your service booking details</p>
+        </div>
+        
+        <div class="p-4 p-md-5">
+          {% if form.errors %}
+          <div class="alert alert-danger">
+            <h5 class="alert-heading">Please correct these errors:</h5>
+            <ul class="mb-0">
+              {% for field in form %}
+                {% for error in field.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          
+          <form method="post">
+            {% csrf_token %}
+            
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label for="id_service" class="form-label">Service Booked</label>
+                {{ form.service }}
+              </div>
+              
+              <div class="col-md-6 mb-4">
+                <label for="id_user" class="form-label">Service Provider</label>
+                {{ form.user }}
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="id_customer_address" class="form-label">Customer Address</label>
+              {{ form.customer_address }}
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <label for="id_book_date" class="form-label">Booking Date</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="id_book_date" name="book_date" placeholder="Select date">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+              </div>
+              
+              <div class="col-md-4 mb-4">
+                <label for="id_book_days" class="form-label">Booking Days</label>
+                {{ form.book_days }}
+              </div>
+              
+              <div class="col-md-4 mb-4">
+                <label for="id_book_hours" class="form-label">Booking Hours</label>
+                {{ form.book_hours }}
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="id_status" class="form-label">Booking Status</label>
+              {{ form.status }}
+            </div>
+            
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-save btn-lg">
+                <i class="fas fa-save me-2"></i>Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize date picker
+    flatpickr("#id_book_date", {
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      allowInput: true,
+      defaultDate: "{{ form.book_date.value|default:'' }}"
+    });
+  });
+</script>
+{% endblock %}

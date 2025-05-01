@@ -1,0 +1,10 @@
+2025-04-30 14:17:42,986-ERROR-Internal Server Error: /customer_register/
+Traceback (most recent call last):
+  File "C:\Users\Binod\Desktop\Hamro_Sewa_Internship\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Binod\Desktop\Hamro_Sewa_Internship\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Binod\Desktop\Hamro_Sewa_Internship\HamroSewa\home\views.py", line 265, in customer_register
+    abd
+NameError: name 'abd' is not defined. Did you mean: 'abs'?
+2025-04-30 14:17:42,990-ERROR-"GET /customer_register/ HTTP/1.1" 500 68139

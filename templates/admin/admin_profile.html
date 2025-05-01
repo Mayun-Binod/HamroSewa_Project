@@ -1,0 +1,137 @@
+{% extends 'admin/admin_nav.html' %}
+
+{% block css %}
+<style>
+  .container {
+    height: 78vh;
+  }
+
+  .profile-box {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 2rem auto;
+  }
+
+  .profile-box h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #dc3545;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-box p.text-end {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-box .row {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .profile-box .row:last-child {
+    border-bottom: none;
+  }
+
+  .profile-box .div2 {
+    font-weight: 600;
+    color: #495057;
+  }
+  .profile-box .div1 {
+    color: #343a40;
+  }
+
+  .profile-box a.btn {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    margin-right: 0.5rem;
+  }
+  .profile-box a.btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .profile-box a.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .profile-box a.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+  .profile-box a.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 576px) {
+    .profile-box {
+      padding: 1.5rem;
+    }
+    .profile-box h2 {
+      font-size: 1.5rem;
+    }
+    .profile-box a.btn {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
+  }
+</style>
+{% endblock css %}
+
+
+{% block body %}
+<div class="container profile-box w-50 my-3">
+    <h2 class="text-center text-danger mt-3">My Profile</h2>
+    <p class="text-end">*Admin Profile</p>
+    <hr>
+    {% include 'messages.html' %}
+    <div align=" left" class="container-fluid" style="width:80%;margin-bottom:5%">
+        <hr>
+        <div class="row">
+            <div class="col-md-6 div2">
+                <strong>Full Name:</strong>
+            </div>
+            <div class="col-md-6 div1">
+                {{profile.first_name}} {{profile.last_name}}
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6 div2">
+                <strong>Username :</strong>
+            </div>
+            <div class="col-md-6 div1">
+                {{profile.username}}
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6 div2">
+                <strong>Email Id :</strong>
+            </div>
+            <div class="col-md-6 div1">
+                {{profile.email}}
+            </div>
+        </div>
+        <hr>
+
+
+        <a href="{% url 'edit_admin' profile.id %}" class="btn btn-outline-primary">Edit Profile</a>
+        <a href="{% url 'changeadminpass' profile.id %}" class="btn btn-outline-danger">Change Password</a>
+
+    </div>
+</div>
+{% endblock %}

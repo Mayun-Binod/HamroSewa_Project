@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} User Profile {% endblock title %}
+{% block css %}
+<style>
+  body {
+    background: #f5f7fa;
+  }
+
+  .profile-box {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #fff;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.1);
+    padding: 2rem;
+  }
+
+  .profile-box h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #E6120E;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .profile-box hr {
+    border-color: #e9ecef;
+    margin: 1.25rem 0;
+  }
+
+  .div2 {
+    font-weight: 600;
+    color: #495057;
+  }
+  .div1 {
+    color: #343a40;
+  }
+
+  .image-thumbnail,
+  .profile-box img {
+    display: block;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.1);
+    margin: 0.5rem auto 1rem;
+  }
+
+  .btn-outline-primary {
+    display: block;
+    width: fit-content;
+    margin: 1.5rem auto 0;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    color: #0066cc;
+    border-color: #0066cc;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+  }
+  .btn-outline-primary:hover {
+    background: #0066cc;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 576px) {
+    .profile-box {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+    .profile-box h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+{% endblock css %}
+
+{% block body %}
+<div class="container profile-box">
+  <h2>My Profile</h2>
+  <hr>
+
+  <div class="text-center">
+    <img src="{{ profile.image.url }}" alt="Profile Image" class="image-thumbnail">
+  </div>
+
+  <div class="container-fluid" style="width:80%">
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Full Name:</strong></div>
+      <div class="col-md-6 div1">{{ profile.user.first_name }} {{ profile.user.last_name }}</div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Email Id :</strong></div>
+      <div class="col-md-6 div1">{{ profile.user.email }}</div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Contact :</strong></div>
+      <div class="col-md-6 div1">{{ profile.phone }}</div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Address :</strong></div>
+      <div class="col-md-6 div1">{{ profile.address }}</div>
+    </div>
+    <hr>
+
+    {% if page %}
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Service :</strong></div>
+      <div class="col-md-6 div1">{{ profile.service.service_name }}</div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Work Location :</strong></div>
+      <div class="col-md-6 div1">{{ profile.city.city }}</div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Work Experience :</strong></div>
+      <div class="col-md-6 div1">{{ profile.experience }} years</div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6 div2"><strong>Training Certificate :</strong></div>
+      <div class="col-md-6 div1">
+        <img src="{{ profile.cert.url }}" alt="Certificate" class="image-thumbnail">
+      </div>
+    </div>
+    <hr>
+    {% endif %}
+
+    <a href="{% url 'editprofile' %}" class="btn btn-outline-primary">Edit Profile</a>
+  </div>
+</div>
+{% endblock body %}
